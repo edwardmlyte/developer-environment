@@ -1,0 +1,45 @@
+#!/bin/bash
+
+SCRIPT_HOME="$(dirname $BASH_SOURCE | sed 's:^\.$:'"$PWD"':g')"
+[ ! -z "$CLOUD_SHELL" ] && ENV=cloud || ENV=mac
+source ./env/env.sh $ENV
+
+function setup_workspace(){
+  if [[ ! -d $WORKSPACE ]]
+  then
+    mkdir -p $WORKSPACE
+  fi
+}
+
+function setup_mount(){
+  if [[ ! -d $MOUNT ]]
+  then
+    mkdir -p $MOUNT
+  fi
+}
+
+function setup_environment(){
+  cp -r $SCRIPT_HOME/env/$ENV/. $MOUNT/
+#  curl -sL https://raw.githubusercontent.com/gpakosz/.tmux/master/.tmux.conf > $MOUNT/.tmux.conf
+}
+
+function run(){
+  $SUDO docker run --name java-dev-env \
+                   --rm \
+                   --tty \
+                   --env TERM=screen-256color-bce \
+                   --interactive \
+                   --publish 8080:8080 \
+                   --publish 8443:8443 \
+                   --volume /home/developer/.vim \
+                   --volume $WORKSPACE:/home/developer/workspace:rw \
+                   --volume $MOUNT:/home/developer \
+                   --volume $SSH:/home/developer/.ssh:ro \
+                   --volume $DOCKER_SOCKET:/var/run/docker.sock \
+                   edwardmlyte/developer-environment:latest 
+}
+
+setup_workspace
+setup_mount
+setup_environment
+run
