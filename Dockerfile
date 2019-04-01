@@ -5,14 +5,12 @@ ENV HUB_VERSION 2.7.0
 
 # User setup
 ARG user=developer
-ARG home=/home/${user}
 ARG uid=1000
-ARG gid=1000
 
 WORKDIR /
 
 # Add user
-RUN useradd -s /bin/bash -u 1000 {user}
+RUN useradd -s /bin/bash -u ${uid} ${user}
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends apt-utils software-properties-common
@@ -38,3 +36,6 @@ RUN apt-get install -y \
 
 # Hub installation
 RUN curl -sL https://github.com/github/hub/releases/download/v${HUB_VERSION}/hub-linux-amd64-${HUB_VERSION}.tgz | tar zx --strip 2 -C /usr/local/bin hub-linux-amd64-${HUB_VERSION}/bin/hub
+
+USER ${user}
+WORKDIR /home/${user}
