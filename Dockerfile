@@ -27,6 +27,7 @@ RUN apt-get install -y \
     docker \
     dos2unix \
     git \
+    gnupg2 \
     jq \
     openjdk-8-jdk \
     tree \
@@ -36,6 +37,15 @@ RUN apt-get install -y \
 
 # Hub installation
 RUN curl -sL https://github.com/github/hub/releases/download/v${HUB_VERSION}/hub-linux-amd64-${HUB_VERSION}.tgz | tar zx --strip 2 -C /usr/local/bin hub-linux-amd64-${HUB_VERSION}/bin/hub
+
+# Ruby installation
+
+#RUN mkdir -p /home/${user}/.gnupg
+#RUN echo "disable-ipv6" >> /home/${user}/.gnupg/dirmngr.conf
+#RUN gpg --keyserver hkp://pool.sks-keyservers.net -v -v --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+#RUN gpg --keyserver hkp://keyserver.pgp.com:80 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+RUN \curl -sSL https://get.rvm.io | bash -s stable --rails
 
 USER ${user}
 WORKDIR /home/${user}
