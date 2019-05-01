@@ -6,6 +6,7 @@ ENV HUB_VERSION 2.7.0
 # User setup
 ARG user=developer
 ARG uid=1000
+ARG home=/home/${user}
 
 WORKDIR /
 
@@ -27,6 +28,7 @@ RUN apt-get install -y \
     docker \
     dos2unix \
     git \
+    gnupg2 \
     jq \
     openjdk-8-jdk \
     tree \
@@ -37,5 +39,13 @@ RUN apt-get install -y \
 # Hub installation
 RUN curl -sL https://github.com/github/hub/releases/download/v${HUB_VERSION}/hub-linux-amd64-${HUB_VERSION}.tgz | tar zx --strip 2 -C /usr/local/bin hub-linux-amd64-${HUB_VERSION}/bin/hub
 
+# Ruby/rails installation
+RUN \curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
+RUN \curl -sSL https://get.rvm.io | bash -s stable --rails
+RUN /bin/bash -c "source /usr/local/rvm/scripts/rvm"
+RUN mkdir ${home}
+RUN touch ${home}/.bashrc
+RUN echo "source /usr/local/rvm/scripts/rvm" >> ${home}/.bashrc
+
+WORKDIR ${home}
 USER ${user}
-WORKDIR /home/${user}
