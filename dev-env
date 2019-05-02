@@ -29,8 +29,6 @@ function run(){
                    --tty \
                    --env TERM=screen-256color-bce \
                    --interactive \
-                   --publish 8080:8080 \
-                   --publish 8443:8443 \
                    --volume /home/developer/.vim \
                    --volume $WORKSPACE:/home/developer/workspace:rw \
                    --volume $MOUNT:/home/developer \
