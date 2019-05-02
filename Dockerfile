@@ -39,13 +39,18 @@ RUN apt-get install -y \
 # Hub installation
 RUN curl -sL https://github.com/github/hub/releases/download/v${HUB_VERSION}/hub-linux-amd64-${HUB_VERSION}.tgz | tar zx --strip 2 -C /usr/local/bin hub-linux-amd64-${HUB_VERSION}/bin/hub
 
+WORKDIR ${home}
+
 # Ruby/rails installation
 RUN \curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
 RUN \curl -sSL https://get.rvm.io | bash -s stable --rails
 RUN /bin/bash -c "source /usr/local/rvm/scripts/rvm"
-RUN mkdir ${home}
 RUN touch ${home}/.bashrc
 RUN echo "source /usr/local/rvm/scripts/rvm" >> ${home}/.bashrc
+RUN /bin/bash -l -c "rvm install 2.4.2"
+RUN /bin/bash -l -c "rvm install jruby-1.7.25"
+RUN /bin/bash -l -c "rvm install jruby-9.1.14.0"
+RUN /bin/bash -l -c "rvm use 2.6.0"
 
 WORKDIR ${home}
 USER ${user}
