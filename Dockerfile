@@ -56,6 +56,6 @@ RUN /bin/bash -l -c "rvm install jruby-9.1.14.0"
 RUN /bin/bash -l -c "rvm use 2.6.0"
 
 # AWS CLI installation
-RUN /bin/bash -c "pip3 install awscli -v"
+RUN /bin/bash -c "pip3 install awscli"
 
 USER ${user}
