@@ -34,7 +34,7 @@ function run(){
                    --volume $MOUNT:/home/developer \
                    --volume $SSH:/home/developer/.ssh:ro \
                    --volume $DOCKER_SOCKET:/var/run/docker.sock \
-                   edwardmlyte/developer-environment:latest
+                   dev-env:latest
 }
 
 setup_workspace
