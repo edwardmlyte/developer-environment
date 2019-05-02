@@ -33,6 +33,7 @@ RUN apt-get install -y \
     openjdk-8-jdk \
     python \
     python3-pip \
+    sudo \
     tree \
     unzip \
     vim \
