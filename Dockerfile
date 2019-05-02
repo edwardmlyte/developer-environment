@@ -31,6 +31,8 @@ RUN apt-get install -y \
     gnupg2 \
     jq \
     openjdk-8-jdk \
+    python \
+    python3-pip \
     tree \
     unzip \
     vim \
@@ -52,5 +54,7 @@ RUN /bin/bash -l -c "rvm install jruby-1.7.25"
 RUN /bin/bash -l -c "rvm install jruby-9.1.14.0"
 RUN /bin/bash -l -c "rvm use 2.6.0"
 
-WORKDIR ${home}
+# AWS CLI installation
+RUN /bin/bash -c "pip3 install awscli -v"
+
 USER ${user}
