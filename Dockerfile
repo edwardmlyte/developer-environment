@@ -11,7 +11,7 @@ ARG home=/home/${user}
 WORKDIR /
 
 # Add user
-RUN useradd -s /bin/bash -u ${uid} ${user}
+RUN useradd -ms /bin/bash -u ${uid} ${user}
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends apt-utils software-properties-common
