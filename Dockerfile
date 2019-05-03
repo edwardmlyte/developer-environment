@@ -56,8 +56,7 @@ RUN apt-get install -y \
 RUN curl -sL https://github.com/github/hub/releases/download/v${HUB_VERSION}/hub-linux-amd64-${HUB_VERSION}.tgz | tar zx --strip 2 -C /usr/local/bin hub-linux-amd64-${HUB_VERSION}/bin/hub
 
 WORKDIR ${home}
+USER ${user}
 
 # AWS CLI installation
-RUN /bin/bash -c "pip3 install awscli"
-
-USER ${user}
+RUN /bin/bash -c "pip3 install awscli --upgrade --user"
