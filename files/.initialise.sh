@@ -1,13 +1,22 @@
-#!/bin/sh
+#!/bin/bash
 
-echo "Please enter your gemfury API token"
+#function gemfury {
+    if [[ -f "/var/gemfury" ]]; then
+        return 0
+    fi
+    echo "Please enter your gemfury API token"
+    
+    read gemfury_token
+    
+    FILE="/home/developer/.gemrc"
+    
+    cat <<EOF >> $FILE
+    :sources:
+    - https://rubygems.org/
+    - https://${gemfury_token}@gem.fury.io/ccycloud/
+EOF
 
-read gemfury_token
+    touch /var/gemfury
+#}
 
-FILE="/home/developer/.gemrc"
-
-/bin/cat <<EOM >$FILE
-:sources:
-- https://rubygems.org/
-- https://${gemfury_token}@gem.fury.io/ccycloud/
-EOM
+#gemfury
