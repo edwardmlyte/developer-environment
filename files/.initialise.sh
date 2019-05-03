@@ -1,7 +1,11 @@
 #!/bin/bash
 
-#function gemfury {
-    if [[ -f "/var/gemfury" ]]; then
+function init {
+    mkdir -p ~/.setup
+}
+
+function gemfury {
+    if [[ -f "~/.setup/.gemfury" ]]; then
         return 0
     fi
     echo "Please enter your gemfury API token"
@@ -16,7 +20,8 @@
     - https://${gemfury_token}@gem.fury.io/ccycloud/
 EOF
 
-    touch /var/gemfury
-#}
+    touch ~/.setup/.gemfury
+}
 
-#gemfury
+init
+gemfury
