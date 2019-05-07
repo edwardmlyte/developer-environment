@@ -12,14 +12,20 @@ function gemfury {
     
     read gemfury_token
     
-    FILE="/home/developer/.gemrc"
-    
-    cat <<EOF >> $FILE
+    cat <<EOF >> ~/.gemrc
     :sources:
     - https://rubygems.org/
     - https://${gemfury_token}@gem.fury.io/ccycloud/
 EOF
 
+    mkdir ~/.bundle
+    cat <<EOF >> ~/.bundle/config
+    ---
+    BUNDLE_GEM__FURY__IO: "${gemfury_token}"
+EOF
+
+    echo "export BUNDLE_GEMFURY_TOKEN=${gemfury_token}" >> /home/developer/.bash_profile
+    source /home/developer/.bash_profile
     touch ~/.setup/.gemfury
 }
 
