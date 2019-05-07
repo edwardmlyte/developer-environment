@@ -1,7 +1,6 @@
 FROM ubuntu:18.10
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV HUB_VERSION 2.7.0
 
 # User setup
 ARG user=developer
@@ -53,6 +52,7 @@ RUN apt-get install -y \
     wget
 
 # Hub installation
+ENV HUB_VERSION 2.11.2
 RUN curl -sL https://github.com/github/hub/releases/download/v${HUB_VERSION}/hub-linux-amd64-${HUB_VERSION}.tgz | tar zx --strip 2 -C /usr/local/bin hub-linux-amd64-${HUB_VERSION}/bin/hub
 
 WORKDIR ${home}
