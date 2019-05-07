@@ -1,7 +1,6 @@
-FROM ubuntu:18.10
+FROM ubuntu:19.04
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV HUB_VERSION 2.7.0
 
 # User setup
 ARG user=developer
@@ -32,7 +31,6 @@ RUN /bin/bash -l -c "rvm install jruby-9.1.14.0"
 RUN /bin/bash -l -c "rvm use 2.6.0"
 
 # Add repositories
-RUN apt-get update && apt-get install -y software-properties-common
 RUN apt-add-repository -y ppa:openjdk-r/ppa
 
 # Package installation
@@ -53,6 +51,7 @@ RUN apt-get install -y \
     wget
 
 # Hub installation
+ENV HUB_VERSION 2.11.2
 RUN curl -sL https://github.com/github/hub/releases/download/v${HUB_VERSION}/hub-linux-amd64-${HUB_VERSION}.tgz | tar zx --strip 2 -C /usr/local/bin hub-linux-amd64-${HUB_VERSION}/bin/hub
 
 WORKDIR ${home}

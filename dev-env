@@ -20,15 +20,10 @@ function setup_mount(){
   fi
 }
 
-function setup_environment(){
-  cp -r $SCRIPT_HOME/env/$ENV/. $MOUNT/
-#  curl -sL https://raw.githubusercontent.com/gpakosz/.tmux/master/.tmux.conf > $MOUNT/.tmux.conf
-}
-
 function run(){
   docker pull $CONTAINER_IMAGE
 
-  $SUDO docker run --name java-dev-env \
+  docker run --name java-dev-env \
                    --rm \
                    --tty \
                    --env TERM=screen-256color-bce \
@@ -43,5 +38,4 @@ function run(){
 
 setup_workspace
 setup_mount
-setup_environment
 run
