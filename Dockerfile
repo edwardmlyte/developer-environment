@@ -60,3 +60,6 @@ USER ${user}
 
 # AWS CLI installation
 RUN /bin/bash -c "pip3 install awscli --upgrade --user"
+
+COPY files/.initialise.sh ${home}/.initialise.sh
+RUN echo "source ${home}/.initialise.sh" >> ${home}/.bashrc
