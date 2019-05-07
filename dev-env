@@ -28,7 +28,7 @@ function setup_environment(){
 function run(){
   docker pull $CONTAINER_IMAGE
 
-  $SUDO docker run --name java-dev-env \
+  docker run --name java-dev-env \
                    --rm \
                    --tty \
                    --env TERM=screen-256color-bce \
