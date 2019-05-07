@@ -1,5 +1,7 @@
 #!/bin/bash
 
+CONTAINER_IMAGE=edwardmlyte/developer-environment:latest
+
 SCRIPT_HOME="$(dirname $BASH_SOURCE | sed 's:^\.$:'"$PWD"':g')"
 [ ! -z "$CLOUD_SHELL" ] && ENV=cloud || ENV=mac
 source ./env/env.sh $ENV
@@ -19,6 +21,8 @@ function setup_mount(){
 }
 
 function run(){
+  docker pull $CONTAINER_IMAGE
+
   docker run --name java-dev-env \
                    --rm \
                    --tty \
@@ -29,7 +33,7 @@ function run(){
                    --volume $MOUNT:/home/developer \
                    --volume $SSH:/home/developer/.ssh:ro \
                    --volume $DOCKER_SOCKET:/var/run/docker.sock \
-                   edwardmlyte/developer-environment:latest
+                   $CONTAINER_IMAGE
 }
 
 setup_workspace
