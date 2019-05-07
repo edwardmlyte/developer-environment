@@ -31,7 +31,6 @@ RUN /bin/bash -l -c "rvm install jruby-9.1.14.0"
 RUN /bin/bash -l -c "rvm use 2.6.0"
 
 # Add repositories
-RUN apt-get update && apt-get install -y software-properties-common
 RUN apt-add-repository -y ppa:openjdk-r/ppa
 
 # Package installation
