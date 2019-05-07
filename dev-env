@@ -30,7 +30,6 @@ function run(){
                    --interactive \
                    --volume /home/developer/.vim \
                    --volume $WORKSPACE:/home/developer/workspace:rw \
-                   --volume $MOUNT:/home/developer \
                    --volume $SSH:/home/developer/.ssh:ro \
                    --volume $DOCKER_SOCKET:/var/run/docker.sock \
                    $CONTAINER_IMAGE

@@ -31,3 +31,4 @@ EOF
 
 init
 gemfury
+./.clone-repos.sh
