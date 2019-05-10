@@ -15,20 +15,7 @@ RUN useradd -ms /bin/bash -u ${uid} ${user}
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
     apt-utils \
-    curl \
-    gnupg2 \
     software-properties-common
-
-# Ruby/rails installation
-RUN \curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
-RUN \curl -sSL https://get.rvm.io | bash -s stable --rails
-RUN /bin/bash -c "source /usr/local/rvm/scripts/rvm"
-RUN touch ${home}/.bashrc
-RUN echo "source /usr/local/rvm/scripts/rvm" >> ${home}/.bashrc
-RUN /bin/bash -l -c "rvm install 2.4.2"
-RUN /bin/bash -l -c "rvm install jruby-1.7.25"
-RUN /bin/bash -l -c "rvm install jruby-9.1.14.0"
-RUN /bin/bash -l -c "rvm use 2.6.0"
 
 # Add repositories
 RUN apt-add-repository -y ppa:openjdk-r/ppa
@@ -37,6 +24,7 @@ RUN apt-add-repository -y ppa:openjdk-r/ppa
 RUN apt-get install -y \
     bash \
     bash-completion \
+    curl \
     docker \
     dos2unix \
     git \
