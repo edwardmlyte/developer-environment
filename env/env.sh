@@ -1,4 +1,4 @@
 DOCKER_SOCKET=/var/run/docker.sock
-WORKSPACE=~/workspace
 MOUNT=~/.developer-environment
+WORKSPACE=~/workspace
 SSH=~/.ssh
