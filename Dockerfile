@@ -49,4 +49,5 @@ USER ${user}
 RUN /bin/bash -c "pip3 install awscli --upgrade --user"
 
 COPY files/.initialise.sh ${home}/.initialise.sh
+COPY files/.clone-repos.sh ${home}/.clone-repos.sh
 RUN echo "source ${home}/.initialise.sh" >> ${home}/.bashrc
