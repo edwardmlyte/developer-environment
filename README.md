@@ -2,10 +2,8 @@
 A self-contained environment for Java and Ruby development.
 Includes (not-exhaustive):
 - openjdk 8
-- rvm
-- ruby
-- rails
 - AWS cli
+- hub
 
 ## Running
 To run the latest release, just clone the repo and execute the included script
